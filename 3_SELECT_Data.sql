@@ -1,0 +1,12 @@
+use recommendb;
+select * from movie;
+select UserID, movie.MovieID, Title from rating, movie where Rating = 5 and movie.MovieId = rating.MovieId;
+Create or replace view ratings5 as select userid, movie.movieid, title from rating, movie where rating = 5 and rating.movieid = movie.movieidratings5;
+select * from ratings5;
+select * from movie where title like '%star trek%';
+select userid as targetgroup from ratings5 where movieid = 1371;
+select movieid, title, count(*) as n5r from ratings5 where movieid = 1371;
+select movieid, title, count(*) as n5r from ratings5 group by movieid;
+select movieid, title, count(*) as n5r from ratings5 group by movieid order by count(*) desc;
+select movieid, title, count(*) as n5r from ratings5 group by movieid order by count(*) desc limit 5;
+select movieid, title, count(*) as n5r from ratings5 where userid in (select userid as targetgroup from ratings5 where movieid = 1371) group by movieid order by count(*) desc limit 10;
